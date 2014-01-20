@@ -22,8 +22,8 @@
   command: mvn package chdir={{source_dir}}
 
 # == Install ==
-- name: Set permissions on {{install_jar}}
-  file: path={{install_jar}} 
+- name: Set permissions on {{target_jar_location}}
+  file: path={{target_jar_location}} 
     state=file
     force=yes
     owner=root
