@@ -1,0 +1,6 @@
+---
+
+# == Dependencies ==
+
+- name: Check install install location
+  file: path="/opt/marathon" state=directory
