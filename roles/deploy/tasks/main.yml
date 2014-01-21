@@ -18,7 +18,7 @@
 - name: Maven Compile
   command: mvn compile chdir={{source_dir}}
 
-- name: Maven Clean
+- name: Maven Package
   command: mvn package chdir={{source_dir}}
 
 # == Install ==
