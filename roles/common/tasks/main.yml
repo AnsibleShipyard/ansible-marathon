@@ -1,6 +1,0 @@
----
-
-# == Dependencies ==
-
-- name: Check install install location
-  file: path={{install_location}} state=directory
