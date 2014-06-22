@@ -1,0 +1,9 @@
+- hosts: localhost
+  sudo: true
+  pre_tasks:
+    - name: install cron
+      apt: name=cron state=present
+    - name: install HAProxy
+      apt: name=haproxy state=present
+  roles:
+    - role: ./
