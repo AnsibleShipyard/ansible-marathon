@@ -10,6 +10,7 @@ respawn
 respawn limit 10 5
 
 # Custom local
+# Command line options: https://github.com/mesosphere/marathon#command-line-options
 script
   exec {{ marathon_install_location }}/bin/start \
     --ha \
