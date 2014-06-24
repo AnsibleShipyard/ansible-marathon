@@ -15,7 +15,7 @@
   copy: src=haproxy_dns_cfg dest="{{ marathon_install_location }}/bin/haproxy_dns_cfg" mode=755
   when: haproxy_dir.stat.exists
 
-- name: Create HAProxy reload script
+- name: Creat HAProxy reload script
   template: src=haproxy_reload.j2 dest={{ marathon_install_location }}/bin/haproxy_reload
     owner="root" group="root" mode=0744
   when: haproxy_dir.stat.exists
