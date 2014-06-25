@@ -1,4 +1,8 @@
 # == Templates ==
+- name: Delete Marathon upstart file
+  file: path="/etc/init/marathon.conf" state=absent
+  sudo: yes
+
 - name: Create Marathon upstart file
   template: src=marathon.j2 dest=/etc/init/marathon.conf
     owner="root" group="root" mode=0664
