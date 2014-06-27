@@ -2,13 +2,13 @@
 # == base ==
 marathon_playbook_version: "0.1.2"
 
-marathon_version: "0.5.0-xcon2_noarch"
+marathon_version: "0.6.0"
 
 # == install ==
-marathon_url: "http://downloads.mesosphere.io/marathon/marathon_{{marathon_version}}.deb"
-marathon_dest_file: "/tmp/marathon_{{marathon_version}}.deb"
+marathon_url: "http://downloads.mesosphere.io/marathon/marathon-{{ marathon_version }}/marathon-{{ marathon_version }}.tgz"
+marathon_dest_file: "/tmp/marathon-{{ marathon_version }}.tgz"
 marathon_install_location: "/opt/marathon"
-marathon_bin: "/usr/local/bin/marathon"
+marathon_bin: "{{ marathon_install_location }}/bin/start"
 
 # == marathon conf ==
 mesos_port: "2181"
