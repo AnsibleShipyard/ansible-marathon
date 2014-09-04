@@ -4,7 +4,7 @@ marathon_playbook_version: "0.1.2"
 
 # == source ==
 marathon_version: "0.6.1"
-marathon_url: "https://downloads.mesosphere.io/marathon/marathon-{{marathon_version}}/marathon-{{marathon_version}}.tgz"
+marathon_url: "http://downloads.mesosphere.io/marathon/marathon-{{marathon_version}}/marathon-{{marathon_version}}.tgz"
 marathon_dest_file: "/tmp/marathon.tgz"
 
 # == install ==
