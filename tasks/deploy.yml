@@ -4,6 +4,3 @@
 
 - name: Extract Archive
   command: tar -xzf {{marathon_dest_file}} --strip 1 -C {{marathon_install_location}}
-
-- name: start marathon
-  service: name=marathon state=started enabled=yes
