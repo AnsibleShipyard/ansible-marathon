@@ -10,6 +10,9 @@
   yum: name={{sbt_dest_file}}
   when: ansible_os_family == "RedHat"
 
+- name: Clean up the installation location
+  file: path={{marathon_install_location}} state=absent
+
 - name: Clone Marathon git repo
   git: repo={{marathon_git_url}} dest={{marathon_install_location}} version={{marathon_version}}
 
