@@ -1,0 +1,7 @@
+---
+- name: Install Red Hat OS packages
+  yum: pkg={{item}} state=present
+  with_items:
+    - git
+    - java-1.7.0-openjdk-devel
+  when: marathon_build_source == "yes"

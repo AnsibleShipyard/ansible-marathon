@@ -1,0 +1,4 @@
+---
+package_type: "rpm"
+sbt_url: "http://dl.bintray.com/sbt/rpm/sbt-{{sbt_version}}.rpm"
+sbt_dest_file: "/tmp/sbt.rpm"

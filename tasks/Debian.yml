@@ -1,11 +1,12 @@
 ---
-- name: Install os packages
+- name: Install Debian OS packages
   apt: pkg={{item}} state=present update_cache=yes
-  with_items: 
+  with_items:
     - git
-    - maven
+    - openjdk-7-jdk
+  when: marathon_build_source == "yes"
 
 # == Templates ==
-- name: Create Marathon default config file
+- name: Create Marathon init file
   template: src=marathon.j2 dest=/etc/init/marathon.conf
     owner="root" group="root" mode=0664

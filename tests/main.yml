@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  connection: local
+  sudo: yes
+  tasks:
+    # Tests
+    - name: Check service
+      shell: service marathon status | grep "running"
+      register: service_status
+      ignore_errors: yes
+    - fail: msg="Service is not running."
+      when: service_status.stdout == ""
