@@ -1,0 +1,4 @@
+---
+package_type: "deb"
+sbt_url: "http://dl.bintray.com/sbt/debian/sbt-{{sbt_version}}.deb"
+sbt_dest_file: "/tmp/sbt.deb"

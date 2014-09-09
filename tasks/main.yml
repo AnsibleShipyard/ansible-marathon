@@ -1,8 +1,20 @@
 ---
+- include_vars: "{{ansible_os_family}}.yml"
+
 - name: Check install location
   file: path={{marathon_install_location}} state=directory
 
 - include: Debian.yml
   when: ansible_os_family == "Debian"
 
+- include: RedHat.yml
+  when: ansible_os_family == "RedHat"
+
+- include: build.yml
+  when: marathon_build_source == "yes"
+
 - include: deploy.yml
+  when: marathon_build_source == "no"
+
+- name: start marathon
+  service: name=marathon state=started enabled=yes
