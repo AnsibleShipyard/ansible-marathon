@@ -1,4 +1,4 @@
-FROM mhamrah/ansible
+FROM mhamrah/ansible-ubuntu
 MAINTAINER Michael Hamrah <m@hamrah.com>
 
 ENV WORKDIR /tmp/build/ansible-marathon
