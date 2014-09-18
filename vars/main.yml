@@ -1,11 +1,12 @@
 ---
 # == base ==
-marathon_playbook_version: "0.1.2"
+marathon_playbook_version: "0.1.4"
 
-marathon_version: "0.6.0"
+marathon_version: "0.7.0-RC3"
 
 # == install ==
 marathon_url: "http://downloads.mesosphere.io/marathon/marathon-{{ marathon_version }}/marathon-{{ marathon_version }}.tgz"
+marathon_url: "http://downloads.mesosphere.io/marathon/v0.7.0-RC3/marathon-0.7.0-RC3.tgz"
 marathon_dest_file: "/tmp/marathon-{{ marathon_version }}.tgz"
 marathon_install_location: "/opt/marathon"
 marathon_bin: "{{ marathon_install_location }}/bin/start"
@@ -14,5 +15,6 @@ marathon_bin: "{{ marathon_install_location }}/bin/start"
 mesos_port: "2181"
 
 # == zookeeper ==
-zookeeper_masters: "zk://{{ groups.mesos_masters | join(':' + mesos_port + ',') }}:{{mesos_port}}/mesos"
+mesos_masters: "zk://{{ groups.mesos_masters | join(':' + mesos_port + ',') }}:{{mesos_port}}/mesos"
+zookeeper_state: "zk://{{ groups.mesos_masters | join(':' + mesos_port + ',') }}:{{mesos_port}}/marathon"
 marathon_hostname: "{{ ansible_default_ipv4.address }}"
