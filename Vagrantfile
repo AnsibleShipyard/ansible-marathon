@@ -10,15 +10,20 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--memory", "2048"]
   end
 
-  # ubuntu
   config.vm.define 'ubuntu', primary: true do |c|
     c.vm.network "private_network", ip: "192.168.100.2"
-    c.vm.box = "trusty-server-cloudimg-amd64-vagrant-disk1"
-    c.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+    c.vm.box = "mesos-0.20.0_ubuntu-14.04_amd64_virtualbox_0.20.0.3"
+    c.vm.box_url = "https://s3-us-west-1.amazonaws.com/everpeace-vagrant-mesos/mesos-0.20.0_ubuntu-14.04_amd64_virtualbox_0.20.0.3.box"
+
     c.vm.provision "shell" do |s|
-      s.inline = "apt-get update -y; apt-get install python-pip -y; pip install -U ansible;"
+      s.inline = "apt-get update -y; apt-get install python-dev python-pip -y; pip install -U ansible; service mesos-master restart"
       s.privileged = true
     end
+
+    c.vm.provision "ansible" do |ansible|
+      ansible.playbook = "tests/playbook.yml"
+    end
+
   end
 
   # centos:
