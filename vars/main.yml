@@ -1,10 +1,42 @@
 ---
 # == base ==
-marathon_playbook_version: "0.2.0"
+marathon_playbook_version: "0.3.0"
 
 # == source ==
 marathon_version: "0.7.1"
 marathon_apt_repo: "deb http://repos.mesosphere.io/{{ansible_distribution|lower}} {{ansible_distribution_release|lower}} main"
 marathon_build_source: "no"
 marathon_port: 8080
-mesos_masters: "zk://localhost:2181/mesos"
+
+# command line flags:
+# https://mesosphere.github.io/marathon/docs/command-line-flags.html
+# required
+master: "zk://localhost:2181/mesos"
+
+# optional
+artifact_store: ""
+checkpoint: ""
+executor: ""
+executor_health_checks: ""
+failover_timeout: ""
+ha: ""
+hostname: ""
+local_port_max: ""
+local_port_min: ""
+mesos_role: ""
+mesos_user: ""
+reconciliation_initial_delay: ""
+reconciliation_interval: ""
+task_launch_timeout: ""
+event_subscriber: ""
+http_endpoints: ""
+zk: ""
+zk_max_versions: ""
+zk_timeout: ""
+
+assets_path: ""
+http_credentials: ""
+http_port: ""
+https_port: ""
+ssl_keystore_password: ""
+ssl_keystore_path: ""

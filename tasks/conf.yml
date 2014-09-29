@@ -1,0 +1,22 @@
+---
+- name: Create Marathon conf directory
+  file: path=/etc/marathon/conf state=directory
+
+- name: Set requied --master option
+  template: src=master.j2 dest=/etc/marathon/conf/master
+
+- name: Remove optional --artifact_store option
+  file: path=/etc/marathon/conf/artifact_store state=absent
+  when: {{artifact_store}} == ""
+
+- name: Set optional --artifact_store option
+  template: src=artifact_store.j2 dest=/etc/marathon/conf/artifact_store
+  when: {{artifact_store}} != ""
+
+- name: Remove optional --checkpoint option
+  file: path=/etc/marathon/conf/?checkpoint state=absent
+  when: {{checkpoint}} == ""
+
+- name: Set optional --checkpoint option
+  file: path=/etc/marathon/conf/?checkpoint
+  when: {{checkpoint}} != ""

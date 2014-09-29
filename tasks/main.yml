@@ -5,11 +5,7 @@
 - include: RedHat.yml
   when: ansible_os_family == "RedHat"
 
-- name: Create Marathon conf directory
-  file: path=/etc/marathon/conf state=directory
-
-- name: Set master option
-  template: src=master.j2 dest=/etc/marathon/conf/master
+- include: conf.yml
 
 - name: Start Marathon service
   service: name=marathon state=started enabled=yes
