@@ -3,9 +3,16 @@
   sudo: yes
   tasks:
     # Tests
-    - name: Check service
+    - name: Check Marathon service for Debian
       shell: service marathon status | grep "running"
       register: service_status
       ignore_errors: yes
-    - fail: msg="Service is not running."
+      when: ansible_os_family == "Debian"
+
+    - name: Check Marathon service for RedHat
+      shell: netstat -tulpn | grep 8080
+      register: service_status
+      when: ansible_os_family == "RedHat"
+
+    - fail: msg="Marathon service is not running."
       when: service_status.stdout == ""

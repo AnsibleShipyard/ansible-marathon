@@ -1,7 +1,6 @@
 ---
-- name: Install Red Hat OS packages
-  yum: pkg={{item}} state=present
-  with_items:
-    - git
-    - java-1.7.0-openjdk-devel
-  when: marathon_build_source == "yes"
+- name: Add mesosphere repo
+  yum: name=http://repos.mesosphere.io/el/6/noarch/RPMS/mesosphere-el-repo-6-2.noarch.rpm state=present
+
+- name: Install Marathon
+  yum: name=marathon-{{marathon_version}} state=present

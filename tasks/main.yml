@@ -1,20 +1,16 @@
 ---
-# - include_vars: "{{ansible_os_family}}.yml"
-
-# - name: Check install location
-  # file: path={{marathon_install_location}} state=directory
-
 - include: Debian.yml
   when: ansible_os_family == "Debian"
 
-# - include: RedHat.yml
-  # when: ansible_os_family == "RedHat"
+- include: RedHat.yml
+  when: ansible_os_family == "RedHat"
 
-# - include: build.yml
-  # when: marathon_build_source == "yes"
+- name: Create Marathon conf directory
+  file: path=/etc/marathon/conf state=directory
 
-# - include: deploy.yml
-  # when: marathon_build_source == "no"
+- name: Set master option
+  template: src=master.j2 dest=/etc/marathon/conf/master
 
-- name: start Marathon service
+- name: Start Marathon service
   service: name=marathon state=started enabled=yes
+  when: ansible_os_family == "Debian"

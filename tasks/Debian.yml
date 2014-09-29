@@ -7,14 +7,3 @@
 
 - name: Install Marathon package
   apt: pkg=marathon={{marathon_version}}-1.0 state=present update_cache=yes
-
-- name: Create Marathon conf directory
-  file: path=/etc/marathon/conf state=directory
-
-- name: Set master option
-  template: src=master.j2 dest=/etc/marathon/conf/master
-
-# == Templates ==
-# - name: Create / overwrite Marathon init file
-#   template: src=marathon.j2 dest=/etc/init/marathon.conf
-#     owner="root" group="root" mode=0664

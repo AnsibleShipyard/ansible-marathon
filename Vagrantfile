@@ -31,9 +31,24 @@ Vagrant.configure("2") do |config|
     c.vm.network "private_network", ip: "192.168.100.3"
     c.vm.box = "centos65-x86_64-20140116"
     c.vm.box_url = "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box"
+
     c.vm.provision "shell" do |s|
-      s.inline = "yum install python-pip -y; pip install -U ansible;"
+      s.inline = "
+      hostname localhost;
+      iptables -F;
+      service iptables save;
+      rpm -Uvh http://archive.cloudera.com/cdh4/one-click-install/redhat/6/x86_64/cloudera-cdh-4-0.x86_64.rpm;
+      yum -y install zookeeper;
+      zookeeper-server-initialize --myid=1
+      zookeeper-server start;
+      rpm -Uvh http://repos.mesosphere.io/el/6/noarch/RPMS/mesosphere-el-repo-6-2.noarch.rpm;
+      yum -y install mesos;
+      "
       s.privileged = true
+    end
+
+    c.vm.provision "ansible" do |ansible|
+      ansible.playbook = "tests/playbook.yml"
     end
   end
 
