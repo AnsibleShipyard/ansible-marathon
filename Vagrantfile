@@ -43,6 +43,7 @@ Vagrant.configure("2") do |config|
       zookeeper-server start;
       rpm -Uvh http://repos.mesosphere.io/el/6/noarch/RPMS/mesosphere-el-repo-6-2.noarch.rpm;
       yum -y install mesos;
+      #mesos-init-wrapper master &;
       "
       s.privileged = true
     end

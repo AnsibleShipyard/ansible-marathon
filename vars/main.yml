@@ -7,4 +7,4 @@ marathon_version: "0.7.1"
 marathon_apt_repo: "deb http://repos.mesosphere.io/{{ansible_distribution|lower}} {{ansible_distribution_release|lower}} main"
 marathon_build_source: "no"
 marathon_port: 8080
-mesos_masters: "localhost"
+mesos_masters: "zk://localhost:2181/mesos"
