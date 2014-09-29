@@ -18,5 +18,5 @@
   when: checkpoint == ""
 
 - name: Set optional --checkpoint option
-  file: path=/etc/marathon/conf/?checkpoint
+  file: path=/etc/marathon/conf/?checkpoint state=touch
   when: checkpoint != ""
