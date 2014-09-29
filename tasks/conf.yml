@@ -7,16 +7,16 @@
 
 - name: Remove optional --artifact_store option
   file: path=/etc/marathon/conf/artifact_store state=absent
-  when: {{artifact_store}} == ""
+  when: artifact_store == ""
 
 - name: Set optional --artifact_store option
   template: src=artifact_store.j2 dest=/etc/marathon/conf/artifact_store
-  when: {{artifact_store}} != ""
+  when: artifact_store != ""
 
 - name: Remove optional --checkpoint option
   file: path=/etc/marathon/conf/?checkpoint state=absent
-  when: {{checkpoint}} == ""
+  when: checkpoint == ""
 
 - name: Set optional --checkpoint option
   file: path=/etc/marathon/conf/?checkpoint
-  when: {{checkpoint}} != ""
+  when: checkpoint != ""
