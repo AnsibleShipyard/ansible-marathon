@@ -1,5 +1,6 @@
 ansible-marathon
 =============
+[![Build Status](https://travis-ci.org/AnsibleShipyard/ansible-marathon.svg)](https://travis-ci.org/AnsibleShipyard/ansible-marathon)
 
 Marathon Playbook for Ansible
 

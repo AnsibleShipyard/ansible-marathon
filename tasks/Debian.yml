@@ -1,12 +1,9 @@
 ---
-- name: Install Debian OS packages
-  apt: pkg={{item}} state=present update_cache=yes
-  with_items:
-    - git
-    - openjdk-7-jdk
-  when: marathon_build_source == "yes"
+- name: Add apt-key
+  apt_key: id=E56151BF keyserver=keyserver.ubuntu.com state=present
 
-# == Templates ==
-- name: Create Marathon init file
-  template: src=marathon.j2 dest=/etc/init/marathon.conf
-    owner="root" group="root" mode=0664
+- name: Add Mesosphere repo
+  apt_repository: repo="{{marathon_apt_repo}}" state=present
+
+- name: Install Marathon package
+  apt: pkg=marathon={{marathon_version}}-1.0 state=present update_cache=yes

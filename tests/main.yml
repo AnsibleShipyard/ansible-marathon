@@ -1,12 +1,12 @@
 ---
-- hosts: localhost
-  connection: local
+- hosts: all
   sudo: yes
   tasks:
     # Tests
-    - name: Check service
+    - name: Check Marathon service for Debian
       shell: service marathon status | grep "running"
       register: service_status
       ignore_errors: yes
-    - fail: msg="Service is not running."
+
+    - fail: msg="Marathon service is not running on Debian host."
       when: service_status.stdout == ""

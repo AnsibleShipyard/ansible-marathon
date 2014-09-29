@@ -1,6 +1,0 @@
----
-- name: Download Marathon version {{marathon_version}}
-  get_url: url={{marathon_url}} dest={{marathon_dest_file}}
-
-- name: Extract Archive
-  command: tar -xzf {{marathon_dest_file}} --strip 1 -C {{marathon_install_location}}
