@@ -2,11 +2,10 @@
 # == base ==
 marathon_playbook_version: "0.1.4"
 
-marathon_version: "0.7.0-RC3"
+marathon_version: "0.7.3"
 
 # == install ==
-marathon_url: "http://downloads.mesosphere.io/marathon/marathon-{{ marathon_version }}/marathon-{{ marathon_version }}.tgz"
-marathon_url: "http://downloads.mesosphere.io/marathon/v0.7.0-RC3/marathon-0.7.0-RC3.tgz"
+marathon_url: "http://downloads.mesosphere.io/marathon/v{{ marathon_version }}/marathon-{{ marathon_version }}.tgz"
 marathon_dest_file: "/tmp/marathon-{{ marathon_version }}.tgz"
 marathon_install_location: "/opt/marathon"
 marathon_bin: "{{ marathon_install_location }}/bin/start"
