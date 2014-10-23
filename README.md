@@ -1,5 +1,6 @@
 ansible-marathon
 =============
+[![Build Status](https://travis-ci.org/AnsibleShipyard/ansible-marathon.svg)](https://travis-ci.org/AnsibleShipyard/ansible-marathon)
 
 Marathon Playbook for Ansible with HAProxy support.
 
@@ -13,7 +14,3 @@ A cron job is configured to run the haproxy_dns_cfg script which will query the 
 
 ### Samples
 This role is part of a mesos/marathon [sample playbook](https://github.com/mhamrah/ansible-mesos-playbook) which leverages this role to build a mesos cluster with separate master and slave nodes.
-
-### Notes
-
-Currently only supports 0.7.0-RC3 and Mesos 0.20. Mesos 0.20 only supports --net="host" mode.

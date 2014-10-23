@@ -1,5 +1,2 @@
-[local]
-localhost
-
-[mesos_masters]
-localhost
+[localhost]
+localhost connection=local

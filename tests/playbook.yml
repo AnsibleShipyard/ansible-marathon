@@ -1,9 +1,11 @@
-- hosts: localhost
-  sudo: true
-  pre_tasks:
-    - name: install cron
-      apt: name=cron state=present
-    - name: install HAProxy
-      apt: name=haproxy state=present
+---
+#
+# Test Playbook
+#
+
+- hosts: all
+  sudo: yes
   roles:
-    - role: ./
+    - {role: ../../}
+
+- include: main.yml
