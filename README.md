@@ -4,7 +4,7 @@ ansible-marathon
 
 Marathon Playbook for Ansible with HAProxy support.
 
-This playbook will install Marathon and relies on the Mesos playbook. For HAProxy support, HAProxy must be present before running Marathon.
+This playbook will install Marathon and relies on the Mesos playbook. For HAProxy support HAProxy must be present before running Marathon.
 
 ## How to use this playbook?
 
