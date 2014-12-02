@@ -1,42 +1,21 @@
 ---
-# == base ==
-marathon_playbook_version: "0.3.0"
+marathon_playbook_version: "0.3.1"
 
-# == source ==
-marathon_version: "0.7.1"
-marathon_apt_repo: "deb http://repos.mesosphere.io/{{ansible_distribution|lower}} {{ansible_distribution_release|lower}} main"
-marathon_build_source: "no"
+marathon_hostname: "{{ inventory_hostname }}"
+marathon_version: "0.7.3"
 marathon_port: 8080
+marathon_apt_repo: "deb http://repos.mesosphere.io/{{ansible_distribution|lower}} {{ansible_distribution_release|lower}} main"
 
 # command line flags:
 # https://mesosphere.github.io/marathon/docs/command-line-flags.html
-# required
-master: "zk://localhost:2181/mesos"
+# Marathon reads files under /etc/marathon/conf and adds them to CLI
+zookeeper_hostnames: "localhost:2181"
+mesos_zookeeper_path: "/mesos"
+marathon_zookeeper_path: "/marathon"
+mesos_zookeeper_masters: "zk://{{ zookeeper_hostnames }}{{ mesos_zookeeper_path }}"
+marathon_zookeeper_state: "zk://{{ zookeeper_hostnames }}{{ marathon_zookeeper_path }}"
+haproxy_script_location: "/usr/local/bin"
 
 # optional
 artifact_store: ""
-checkpoint: ""
-executor: ""
-executor_health_checks: ""
-failover_timeout: ""
-ha: ""
-hostname: ""
-local_port_max: ""
-local_port_min: ""
-mesos_role: ""
-mesos_user: ""
-reconciliation_initial_delay: ""
-reconciliation_interval: ""
-task_launch_timeout: ""
-event_subscriber: ""
-http_endpoints: ""
-zk: ""
-zk_max_versions: ""
-zk_timeout: ""
-
-assets_path: ""
-http_credentials: ""
-http_port: ""
-https_port: ""
-ssl_keystore_password: ""
-ssl_keystore_path: ""
+checkpoint: "true"
