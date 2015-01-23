@@ -1,6 +1,6 @@
 ansible-marathon
 =============
-[![Build Status](https://travis-ci.org/AnsibleShipyard/ansible-marathon.svg)](https://travis-ci.org/AnsibleShipyard/ansible-marathon)
+[![Build Status](https://travis-ci.org/AnsibleShipyard/ansible-marathon.svg?branch=master)](https://travis-ci.org/AnsibleShipyard/ansible-marathon)
 
 Marathon role for Ansible with optional HAProxy configuration support. Marathon is installed with HA mode activated [(see command line options)](https://github.com/mesosphere/marathon#command-line-options).
 
