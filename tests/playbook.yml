@@ -3,7 +3,8 @@
 # Test Playbook
 #
 
-- hosts: all
+- hosts: localhost
+  connection: local
   sudo: yes
   roles:
     - {role: ../../}
