@@ -6,4 +6,4 @@
   apt_repository: repo="{{marathon_apt_repo}}" state=present
 
 - name: Install Marathon package
-  apt: pkg=marathon={{marathon_version}}-1.0 state=present update_cache=yes
+  apt: pkg=marathon={{marathon_version}}-1.* state=present update_cache=yes
