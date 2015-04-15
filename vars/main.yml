@@ -2,7 +2,7 @@
 marathon_playbook_version: "0.3.1"
 
 marathon_hostname: "{{ inventory_hostname }}"
-marathon_version: "0.7.6"
+marathon_version: "0.8.1"
 marathon_port: 8080
 marathon_apt_repo: "deb http://repos.mesosphere.io/{{ansible_distribution|lower}} {{ansible_distribution_release|lower}} main"
 
