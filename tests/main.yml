@@ -1,12 +1,12 @@
 ---
-- hosts: all
-  sudo: yes
-  tasks:
-    # Tests
-    - name: Check Marathon service for Debian
-      shell: service marathon status | grep "running"
-      register: service_status
-      ignore_errors: yes
 
-    - fail: msg="Marathon service is not running on Debian host."
-      when: service_status.stdout == ""
+- hosts: localhost
+  connection: local
+  sudo: yes
+  
+  roles:
+    - ansible-marathon
+
+  # tasks:
+    # Ansible does not recommend checking for service status as a test
+    # Need to find a rest endpoint to curl instead
