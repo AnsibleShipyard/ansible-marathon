@@ -11,7 +11,7 @@ Marathon role for Ansible with optional HAProxy configuration support. Marathon 
 
 ## Role Variables
 
-See ```vars/main.yml``` for a full list. The most important settings are:
+See ```defaults/main.yml``` for a full list. The most important settings are:
 
 * ```zookeeper_hostnames: "localhost:2181"``` The path to Zookeeper which Marathon can use to find the Mesos masters and use as a state store.
 * ```mesos_zookeeper_path: "/mesos"``` The path to Mesos in the Zookeeper cluster
