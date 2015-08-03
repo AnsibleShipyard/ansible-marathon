@@ -4,9 +4,15 @@
   connection: local
   sudo: yes
   
-  roles:
-    - ansible-marathon
+  tasks:
+    - name: Wait for Marathon to be up
+      wait_for: host="{{ansible_default_ipv4.address}}" port=8080 state=started delay=3 timeout=5
+    
+    - name: Test for Marathon ... endpoint
+      get_url: 
+        url="http://{{ansible_default_ipv4.address}}:8080/v2/info" 
+        dest=/tmp/marathon-info
+        force=yes
+      register: status
+      failed_when: "'OK' not in status.msg"
 
-  # tasks:
-    # Ansible does not recommend checking for service status as a test
-    # Need to find a rest endpoint to curl instead

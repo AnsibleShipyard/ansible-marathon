@@ -1,6 +1,6 @@
 ---
 - name: Add mesosphere repo
-  yum: name=http://repos.mesosphere.io/el/6/noarch/RPMS/mesosphere-el-repo-6-2.noarch.rpm state=present
+  yum: name={{ mesosphere_repo }} state=present
 
 - name: Install Marathon
   yum: name=marathon-{{marathon_version}} state=present
