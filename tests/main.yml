@@ -6,9 +6,9 @@
   
   tasks:
     - name: Wait for Marathon to be up
-      wait_for: host="{{ansible_default_ipv4.address}}" port=8080 state=started delay=3 timeout=5
+      wait_for: host="{{ansible_default_ipv4.address}}" port=8080 state=started delay=3 timeout=15
     
-    - name: Test for Marathon ... endpoint
+    - name: Test for Marathon info endpoint
       get_url: 
         url="http://{{ansible_default_ipv4.address}}:8080/v2/info" 
         dest=/tmp/marathon-info
