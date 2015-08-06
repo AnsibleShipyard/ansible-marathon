@@ -2,8 +2,8 @@
 - name: Create Marathon conf directory
   file: path=/etc/marathon/conf state=directory
 
-- name: Set requied --master option
-  lineinfile: line={{ mesos_zookeeper_masters }} dest=/etc/marathon/conf/master create=yes
+- name: Set required --master option
+  template: src=master.j2 dest=/etc/marathon/conf/master
 
 - name: Remove optional --artifact_store option
   file: path=/etc/marathon/conf/artifact_store state=absent
@@ -30,7 +30,7 @@
   when: marathon_zookeeper_state != ""
 
 - name: Set --hostname option
-  lineinfile: line={{ marathon_hostname }} dest=/etc/marathon/conf/hostname create=yes
+  template: src=hostname.j2 dest=/etc/marathon/conf/hostname
 
 - name: Set --http-port option
-  lineinfile: line={{ marathon_port }} dest=/etc/marathon/conf/http_port create=yes
+  template: src=http_port.j2 dest=/etc/marathon/conf/http_port
