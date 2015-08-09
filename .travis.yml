@@ -14,13 +14,20 @@ install:
 
   # Add ansible.cfg to pick up roles path.
   - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
+  
+  # Install Mesosphere, marathon needs it
+  - sudo sh -c "echo 'deb http://repos.mesosphere.com/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) main' >> /etc/apt/sources.list.d/mesosphere.list"
+  - sudo apt-get update -qq
+  - sudo apt-get install mesos -y --force-yes
+  - sudo sh -c "echo 1 > /etc/zookeeper/conf/myid"
+  - sudo sh -c "echo 'server.1=localhost:2888:3888' >> /etc/zookeeper/conf/zoo.cfg"
+  - sudo service zookeeper restart
+  - sudo service mesos-master restart
 
 script:
   # Check the role/playbook's syntax.
   - "ansible-playbook -i tests/inventory tests/$SITE --syntax-check"
 
   # Run the role/playbook with ansible-playbook.
-  - "ansible-playbook -i tests/inventory tests/main.yml --connection=local --sudo"
+  - "ansible-playbook -i tests/inventory tests/playbook.yml --connection=local --sudo"
 
-  # Healthcheck
-  # - "curl http://localhost:8080/"
