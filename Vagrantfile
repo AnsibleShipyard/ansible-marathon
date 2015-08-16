@@ -53,4 +53,25 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  # centos 7:
+  config.vm.define 'centos7' do |c|
+    c.vm.network "private_network", ip: "192.168.100.4"
+    c.vm.box = "centos/7"
+    c.vm.provision "shell" do |s|
+      s.inline = "
+      hostname localhost;
+      iptables -F;
+      service iptables save;
+      rpm -Uvh http://archive.cloudera.com/cdh4/one-click-install/redhat/6/x86_64/cloudera-cdh-4-0.x86_64.rpm;
+      yum -y install zookeeper;
+      zookeeper-server-initialize --myid=1
+      zookeeper-server start;
+      rpm -Uvh http://repos.mesosphere.io/el/7/noarch/RPMS/mesosphere-el-repo-7-2.noarch.rpm;
+      yum install -y epel-release;
+      yum -y install mesos ansible;
+      "
+      s.privileged = true
+    end
+  end
+  
 end
