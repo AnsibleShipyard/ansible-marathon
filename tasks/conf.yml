@@ -47,7 +47,6 @@
 - name: Upstrart environment variables 
   lineinfile: dest=/etc/init/marathon.conf backup=yes state=present insertbefore='exec.*' line="env {{ item }}"
   with_items: marathon_env_vars
-#    - "JAVA_OPTS={{ marathon_env_java_opts }}"
   when: etc_init_check.stat.exists == true
   
 - name: systemd environment variables
