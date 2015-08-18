@@ -1,4 +1,5 @@
 ---
+
 - name: Create Marathon conf directory
   file: path=/etc/marathon/conf state=directory
 
@@ -34,3 +35,21 @@
 
 - name: Set --http-port option
   template: src=http_port.j2 dest=/etc/marathon/conf/http_port
+  
+- name: Upstart check
+  stat: path=/etc/init/
+  register: etc_init_check
+
+- name: systemd check
+  stat: path=/usr/lib/systemd/system/
+  register: systemd_check
+  
+- name: Upstrart environment variables 
+  lineinfile: dest=/etc/init/marathon.conf backup=yes state=present insertbefore='exec.*' line="env {{ item }}"
+  with_items: marathon_env_vars
+  when: etc_init_check.stat.exists == true
+  
+- name: systemd environment variables
+  template: src=sysconfig.j2 dest=/etc/sysconfig/marathon 
+  when: systemd_check.stat.exists == true
+
