@@ -1,1 +1,0 @@
-marathon_apt_repo: "deb http://repos.mesosphere.io/{{ansible_distribution|lower}} {{ansible_distribution_release|lower}} main"
