@@ -3,4 +3,4 @@
   yum: name={{ mesosphere_yum_repo }} state=present
 
 - name: Install Marathon
-  yum: name=marathon-{{marathon_version}} state=present
+  yum: name={{ marathon_yum_package }} state=present
