@@ -5,5 +5,3 @@ mesosphere_releases:
   '6': 'mesosphere-el-repo-6-3.noarch.rpm'
   '7': 'mesosphere-el-repo-7-1.noarch.rpm'
 
-mesosphere_repo: "http://repos.mesosphere.com/el/{{ os_version_major }}/noarch/RPMS/{{ mesosphere_releases[os_version_major] }}"
-
