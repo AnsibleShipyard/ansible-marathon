@@ -1,5 +1,5 @@
 ---
-marathon_playbook_version: "0.3.2"
+marathon_playbook_version: "0.3.3"
 marathon_version: "0.8.1"
 
 # Debian: Mesosphere apt repository URL
