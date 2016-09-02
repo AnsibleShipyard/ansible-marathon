@@ -30,12 +30,20 @@
   template: src=zk.j2 dest=/etc/marathon/conf/zk
   when: marathon_zookeeper_state != ""
 
+- name: Remove optional --mesos_role option
+  file: path=/etc/marathon/conf/mesos_role state=absent
+  when: marathon_mesos_role == ""
+
+- name: Set optional --mesos_role option
+  template: src=mesos_role.j2 dest=/etc/marathon/conf/mesos_role
+  when: marathon_mesos_role != ""
+
 - name: Set --hostname option
   template: src=hostname.j2 dest=/etc/marathon/conf/hostname
 
 - name: Set --http-port option
   template: src=http_port.j2 dest=/etc/marathon/conf/http_port
-  
+
 - name: Upstart check
   stat: path=/etc/init/
   register: etc_init_check
@@ -43,13 +51,12 @@
 - name: systemd check
   stat: path=/usr/lib/systemd/system/
   register: systemd_check
-  
-- name: Upstrart environment variables 
+
+- name: Upstart environment variables
   lineinfile: dest=/etc/init/marathon.conf backup=yes state=present insertbefore='exec.*' line="env {{ item }}"
   with_items: marathon_env_vars
   when: etc_init_check.stat.exists == true
-  
-- name: systemd environment variables
-  template: src=sysconfig.j2 dest=/etc/sysconfig/marathon 
-  when: systemd_check.stat.exists == true
 
+- name: systemd environment variables
+  template: src=sysconfig.j2 dest=/etc/sysconfig/marathon
+  when: systemd_check.stat.exists == true
