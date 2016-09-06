@@ -44,6 +44,14 @@
 - name: Set --http-port option
   template: src=http_port.j2 dest=/etc/marathon/conf/http_port
 
+- name: Set additional options
+  copy:
+    content: "{{ item.value }}"
+    dest: "/etc/marathon/conf/{{ item.name }}"
+  with_items: marathon_additional_configs
+  tags:
+    - config-additional
+
 - name: Upstart check
   stat: path=/etc/init/
   register: etc_init_check
