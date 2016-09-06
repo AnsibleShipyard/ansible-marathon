@@ -48,8 +48,7 @@
   lineinfile: dest=/etc/init/marathon.conf backup=yes state=present insertbefore='exec.*' line="env {{ item }}"
   with_items: marathon_env_vars
   when: etc_init_check.stat.exists == true
-  
-- name: systemd environment variables
-  template: src=sysconfig.j2 dest=/etc/sysconfig/marathon 
-  when: systemd_check.stat.exists == true
 
+- name: systemd environment variables
+  template: src=sysconfig.j2 dest=/etc/sysconfig/marathon
+  when: systemd_check.stat.exists == true

@@ -3,14 +3,24 @@
 
 - include: Debian.yml
   when: ansible_os_family == "Debian"
+  tags:
+    - install
 
 - include: RedHat.yml
   when: ansible_os_family == "RedHat"
+  tags:
+    - install
 
 - include: conf.yml
+  tags:
+    - config
 
 - include: haproxy.yml
   when: haproxy_script_location != ""
+  tags:
+    - haproxy
 
 - name: Start Marathon service
-  service: name=marathon state=restarted enabled=yes 
+  service: name=marathon state=restarted enabled=yes
+  tags:
+    - restart
