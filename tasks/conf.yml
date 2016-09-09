@@ -5,50 +5,62 @@
 
 - name: Set required --master option
   template: src=master.j2 dest=/etc/marathon/conf/master
+  notify: Restart marathon
 
 - name: Remove optional --artifact_store option
   file: path=/etc/marathon/conf/artifact_store state=absent
   when: artifact_store == ""
+  notify: Restart marathon
 
 - name: Set optional --artifact_store option
   template: src=artifact_store.j2 dest=/etc/marathon/conf/artifact_store
   when: artifact_store != ""
+  notify: Restart marathon
 
 - name: Remove optional --checkpoint option
   file: path=/etc/marathon/conf/?checkpoint state=absent
   when: checkpoint == ""
+  notify: Restart marathon
 
 - name: Set optional --checkpoint option
   file: path=/etc/marathon/conf/?checkpoint state=touch
   when: checkpoint != ""
+  notify: Restart marathon
 
 - name: Remove optional --zk option
   file: path=/etc/marathon/conf/zk state=absent
   when: marathon_zookeeper_state == ""
+  notify: Restart marathon
 
 - name: Set optional --zk option
   template: src=zk.j2 dest=/etc/marathon/conf/zk
   when: marathon_zookeeper_state != ""
+  notify: Restart marathon
 
 - name: Remove optional --mesos_role option
   file: path=/etc/marathon/conf/mesos_role state=absent
   when: marathon_mesos_role == ""
+  notify: Restart marathon
 
 - name: Set optional --mesos_role option
   template: src=mesos_role.j2 dest=/etc/marathon/conf/mesos_role
   when: marathon_mesos_role != ""
+  notify: Restart marathon
 
 - name: Set --hostname option
   template: src=hostname.j2 dest=/etc/marathon/conf/hostname
+  notify: Restart marathon
 
 - name: Set --http-port option
   template: src=http_port.j2 dest=/etc/marathon/conf/http_port
+  notify: Restart marathon
 
 - name: Set additional options
   copy:
     content: "{{ item.value }}"
     dest: "/etc/marathon/conf/{{ item.name }}"
   with_items: marathon_additional_configs
+  notify: Restart marathon
   tags:
     - config-additional
 
@@ -64,7 +76,9 @@
   lineinfile: dest=/etc/init/marathon.conf backup=yes state=present insertbefore='exec.*' line="env {{ item }}"
   with_items: marathon_env_vars
   when: etc_init_check.stat.exists == true
+  notify: Restart marathon
 
 - name: systemd environment variables
   template: src=sysconfig.j2 dest=/etc/sysconfig/marathon
   when: systemd_check.stat.exists == true
+  notify: Restart marathon
