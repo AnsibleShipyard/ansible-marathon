@@ -4,14 +4,10 @@
   register: haproxy_dir
 
 - name: Setup HAProxy script
-  copy: src=haproxy_dns_cfg dest="{{ haproxy_script_location }}/haproxy_dns_cfg" mode=755
-  when: haproxy_dir.stat.exists
-
-- name: Create HAProxy reload script
-  template: src=haproxy_reload.j2 dest={{ haproxy_script_location }}/haproxy_reload
-    owner="root" group="root" mode=0744
+  template: src=haproxy_reload.sh.j2 dest="{{ haproxy_script_location }}/haproxy_reload.sh"
+    owner="root" group="root" mode=755
   when: haproxy_dir.stat.exists
 
 - name: Setup cron job for HAProxy
-  cron: name="reload marathon haproxy" minute="*/1" job="{{ haproxy_script_location }}/haproxy_reload"
+  cron: name="reload marathon haproxy" minute="*/1" job="{{ haproxy_script_location }}/haproxy_reload.sh"
   when: haproxy_dir.stat.exists
