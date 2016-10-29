@@ -59,7 +59,7 @@
   copy:
     content: "{{ item.value }}"
     dest: "/etc/marathon/conf/{{ item.name }}"
-  with_items: marathon_additional_configs
+  with_items: "{{ marathon_additional_configs }}"
   notify: Restart marathon
   tags:
     - config-additional
