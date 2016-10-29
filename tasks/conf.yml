@@ -23,7 +23,7 @@
   notify: Restart marathon
 
 - name: Set optional --checkpoint option
-  file: path=/etc/marathon/conf/?checkpoint state=touch
+  copy: content="" dest=/etc/marathon/conf/?checkpoint
   when: checkpoint != ""
   notify: Restart marathon
 
