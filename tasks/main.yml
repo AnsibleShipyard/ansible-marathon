@@ -21,4 +21,4 @@
     - haproxy
 
 - name: Enable Marathon service
-  service: name=marathon enabled=yes state=started
+  service: name=marathon enabled=yes
