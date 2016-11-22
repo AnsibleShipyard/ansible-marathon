@@ -4,3 +4,4 @@
 
 - name: Install Marathon
   yum: name={{ marathon_yum_package }} state=present
+  notify: Restart marathon

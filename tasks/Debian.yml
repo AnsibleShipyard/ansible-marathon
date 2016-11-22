@@ -7,3 +7,4 @@
 
 - name: Install Marathon package
   apt: pkg={{ marathon_apt_package }} state=present update_cache=yes
+  notify: Restart marathon
