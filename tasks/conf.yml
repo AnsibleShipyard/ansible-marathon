@@ -71,6 +71,9 @@
     - ansible_service_mgr != 'systemd'
   notify: Restart marathon
 
+- name: Create /etc/sysconfig directory
+  file: path=/etc/sysconfig state=directory owner=root group=root mode=0755
+
 - name: systemd environment variables
   template: src=sysconfig.j2 dest=/etc/sysconfig/marathon
   when:
