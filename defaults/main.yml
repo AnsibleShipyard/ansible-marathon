@@ -18,11 +18,18 @@ marathon_env_vars:
 # command line flags:
 # https://mesosphere.github.io/marathon/docs/command-line-flags.html
 # Marathon reads files under /etc/marathon/conf and adds them to CLI
+# The path to Zookeeper which Marathon can use to find the Mesos masters and use as a state store.
 zookeeper_hostnames: "localhost:2181"
+
+# The path to Mesos in the Zookeeper cluster
 mesos_zookeeper_path: "/mesos"
+
+# The path to Marathon in the Zookeeper cluster
 marathon_zookeeper_path: "/marathon"
 mesos_zookeeper_masters: "zk://{{ zookeeper_hostnames }}{{ mesos_zookeeper_path }}"
 marathon_zookeeper_state: "zk://{{ zookeeper_hostnames }}{{ marathon_zookeeper_path }}"
+
+# The path to install the haproxy configuration script. If this is an empty string ```""``` haproxy configuration will be disabled.
 haproxy_script_location: "/usr/local/bin"
 
 # optional
