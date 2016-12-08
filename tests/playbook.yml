@@ -1,12 +1,9 @@
 ---
-#
-# Test Playbook
-#
-
 - hosts: localhost
   connection: local
-  sudo: yes
+  remote_user: root
   roles:
-    - {role: ../../}
-
-- include: main.yml
+    - role: role_under_test
+      marathon_env_vars:
+        - "JAVA_OPTS={{ marathon_env_java_opts }}"
+        - "TEST_ENV=1"

@@ -1,9 +1,9 @@
 ---
 marathon_playbook_version: "0.3.4"
-marathon_version: "0.8.1"
+marathon_version: "1.3.6"
 
 # Debian: Mesosphere apt repository URL
-marathon_apt_package: "marathon={{ marathon_version }}-1.*"
+marathon_apt_package: "marathon={{ marathon_version }}-*"
 marathon_apt_repo: "deb http://repos.mesosphere.com/{{ansible_distribution|lower}} {{ansible_distribution_release|lower}} main"
 
 # RedHat: Mesosphere yum repository URL

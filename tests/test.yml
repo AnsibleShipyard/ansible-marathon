@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  connection: local
+  remote_user: root
+  tasks:
+    - name: Restart marathon
+      service: name=marathon state=restarted
+
+    - shell: "ps aux | grep -i marathon"
+      register: status
+      failed_when: status.rc != 0
+      when: ansible_service_mgr != 'systemd'
+
+    - shell: "systemctl status marathon | grep running"
+      register: status
+      failed_when: status.rc != 0
+      when: ansible_service_mgr == 'systemd'
+
+      # Check if marathon systemd unit sources marathon_environment file
+    - shell: "grep -a 'TEST_ENV=1' /proc/`systemctl status marathon | grep 'Main PID:' | cut -d ' ' -f4`/environ"
+      register: status
+      failed_when: status.rc != 0
+      when: ansible_service_mgr == 'systemd'

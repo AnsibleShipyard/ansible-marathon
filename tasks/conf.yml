@@ -64,21 +64,20 @@
   tags:
     - config-additional
 
-- name: Upstart check
-  stat: path=/etc/init/
-  register: etc_init_check
-
-- name: systemd check
-  stat: path=/usr/lib/systemd/system/
-  register: systemd_check
-
 - name: Upstart environment variables
   lineinfile: dest=/etc/init/marathon.conf backup=yes state=present create=true insertbefore='exec.*' line="env {{ item }}"
   with_items: "{{ marathon_env_vars }}"
-  when: etc_init_check.stat.exists == true
+  when:
+    - ansible_service_mgr != 'systemd'
   notify: Restart marathon
 
-- name: systemd environment variables
-  template: src=sysconfig.j2 dest=/etc/sysconfig/marathon
-  when: systemd_check.stat.exists == true
-  notify: Restart marathon
+- name: Create /usr/lib/systemd/system/marathon.service.d directory
+  file: path=/usr/lib/systemd/system/marathon.service.d state=directory owner=root group=root mode=0755
+
+- name: Systemd environment variables
+  template: src=marathon_environment.j2 dest=/usr/lib/systemd/system/marathon.service.d/marathon-environment.conf
+  when:
+    - ansible_service_mgr == 'systemd'
+  notify:
+    - Reload daemon
+    - Restart marathon
