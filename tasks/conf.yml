@@ -71,11 +71,13 @@
     - ansible_service_mgr != 'systemd'
   notify: Restart marathon
 
-- name: Create /etc/sysconfig directory
-  file: path=/etc/sysconfig state=directory owner=root group=root mode=0755
+- name: Create /usr/lib/systemd/system/marathon.service.d directory
+  file: path=/usr/lib/systemd/system/marathon.service.d state=directory owner=root group=root mode=0755
 
-- name: systemd environment variables
-  template: src=sysconfig.j2 dest=/etc/sysconfig/marathon
+- name: Systemd environment variables
+  template: src=marathon_environment.j2 dest=/usr/lib/systemd/system/marathon.service.d/marathon-environment.conf
   when:
     - ansible_service_mgr == 'systemd'
-  notify: Restart marathon
+  notify:
+    - Reload daemon
+    - Restart marathon

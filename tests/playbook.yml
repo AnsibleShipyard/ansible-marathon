@@ -4,3 +4,6 @@
   remote_user: root
   roles:
     - role: role_under_test
+      marathon_env_vars:
+        - "JAVA_OPTS={{ marathon_env_java_opts }}"
+        - "TEST_ENV=1"
