@@ -32,6 +32,10 @@ marathon_zookeeper_state: "zk://{{ zookeeper_hostnames }}{{ marathon_zookeeper_p
 # The path to install the haproxy configuration script. If this is an empty string ```""``` haproxy configuration will be disabled.
 haproxy_script_location: "/usr/local/bin"
 
+# SSL
+mesos_ssl_enabled: false
+mesos_ssl_support_downgrade: false
+
 # optional
 artifact_store: ""
 checkpoint: "true"
