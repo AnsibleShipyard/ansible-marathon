@@ -2,6 +2,7 @@ ansible-marathon
 =================
 
 [![Build Status](https://travis-ci.org/AnsibleShipyard/ansible-marathon.svg?branch=master)](https://travis-ci.org/AnsibleShipyard/ansible-marathon)
+[![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/AnsibleShipyard/devs)
 
 Apache Marathon playbook with optional HAProxy configuration support.
 
