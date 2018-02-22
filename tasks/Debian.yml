@@ -3,7 +3,13 @@
   apt_key: id=E56151BF keyserver=keyserver.ubuntu.com state=present
 
 - name: Add Mesosphere repo
-  apt_repository: repo="{{marathon_apt_repo}}" state=present update_cache=yes
+  apt_repository: repo='deb {{ marathon_apt_url }} {{ ansible_distribution_release | lower }} main' state=present update_cache=yes
+
+- name: Pin Marathon version
+  template:
+    src: marathon.pref.j2
+    dest: /etc/apt/preferences.d/marathon.pref
+  when: marathon_apt_pin_priority | default(false) | bool
 
 - name: Install Marathon package
   apt: pkg={{ marathon_apt_package }} state=present

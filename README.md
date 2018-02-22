@@ -32,6 +32,8 @@ marathon_version: "1.3.6"
 # Debian: Mesosphere apt repository URL
 marathon_apt_package: "marathon={{ marathon_version }}-*"
 marathon_apt_repo: "deb http://repos.mesosphere.com/{{ansible_distribution|lower}} {{ansible_distribution_release|lower}} main"
+# Debian apt pin priority for the marathon package. If empty (the default), no pin priority is used.
+marathon_apt_pin_priority:
 
 # RedHat: Mesosphere yum repository URL
 marathon_yum_package: "marathon-{{ marathon_version }}"
